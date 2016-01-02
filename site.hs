@@ -39,6 +39,7 @@ main = hakyll $ do
     compile $ pandocCompiler
       >>= loadAndApplyTemplate "templates/article.html" articleCtx
       >>= saveSnapshot "content"
+      >>= loadAndApplyTemplate "templates/duoshuo.html" articleCtx
       >>= loadAndApplyTemplate "templates/default.html" articleCtx
       >>= relativizeUrls
 
