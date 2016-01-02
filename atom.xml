@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Chaoya Li</title>
+    <link href="http://www.chaoya.info/atom.xml" rel="self" />
+    <link href="http://www.chaoya.info" />
+    <id>http://www.chaoya.info/atom.xml</id>
+    <author>
+        <name>Chaoya Li</name>
+        <email>chaoya@chaoya.info</email>
+    </author>
+    <updated>2016-01-03T00:00:00Z</updated>
+    <entry>
+    <title>Automatic Differentiation</title>
+    <link href="http://www.chaoya.info/articles/2016-01-03-ad.html" />
+    <id>http://www.chaoya.info/articles/2016-01-03-ad.html</id>
+    <published>2016-01-03T00:00:00Z</published>
+    <updated>2016-01-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div>
+  <div class="date">2016-01-03</div>
+</div>
+
+
+]]></summary>
+</entry>
+
+</feed>
