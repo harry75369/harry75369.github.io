@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Data.Monoid (mappend)
 import Hakyll
+import qualified Data.Set as S
+import Text.Pandoc.Options
 
 feed :: FeedConfiguration
 feed = FeedConfiguration
@@ -10,6 +12,17 @@ feed = FeedConfiguration
   , feedAuthorEmail = "chaoya@chaoya.info"
   , feedRoot        = "http://www.chaoya.info"
   }
+
+mathWriterOptions =
+  let defaultExtensions = writerExtensions defaultHakyllWriterOptions
+      mathExtensions    = foldr S.insert defaultExtensions
+        [ Ext_tex_math_dollars
+        , Ext_latex_macros
+        ]
+   in defaultHakyllWriterOptions
+        { writerExtensions = mathExtensions
+        , writerHTMLMathMethod = MathJax ""
+        }
 
 main :: IO ()
 main = hakyll $ do
@@ -36,7 +49,7 @@ main = hakyll $ do
                  `mappend` defaultContext
   match "articles/*" $ do
     route $ setExtension "html"
-    compile $ pandocCompiler
+    compile $ pandocCompilerWith defaultHakyllReaderOptions mathWriterOptions
       >>= loadAndApplyTemplate "templates/article.html" articleCtx
       >>= saveSnapshot "content"
       >>= loadAndApplyTemplate "templates/duoshuo.html" articleCtx

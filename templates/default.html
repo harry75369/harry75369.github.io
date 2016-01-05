@@ -5,11 +5,23 @@
     <title>Chaoya Li - $title$</title>
     <link rel="stylesheet" href="/css/normalize.css"/>
     <link rel="stylesheet" href="/css/default.css"/>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+var jq = jQuery.noConflict();
+function addBlankTargetForLinks() {
+  jq('a[href^="http"]').each(function(){
+    jq(this).attr('target', '_blank');
+  });
+};
+jq(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+    </script>
   </head>
   <body>
     <div id="header" class="box">
-      <h1><a href="/index.html">Chaoya Li</a></h1>
-      <h2>$title$</h2>
+      <h2><a href="/index.html">Chaoya Li</a></h2>
+      <h1>$title$</h1>
       <h3>在创造中发现快乐</h3>
       <div id="nav">
         <ul>
@@ -29,5 +41,7 @@
     <div id="footer" class="box">
       版权所有 © 2016 Chaoya Li
     </div>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </body>
 </html>
