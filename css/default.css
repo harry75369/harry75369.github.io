@@ -2,6 +2,7 @@ body {
   margin: 0px auto;
   width: 750px;
   background: url('../img/bg.jpg') no-repeat fixed center;
+  background-size: 100% 100%;
 }
 
 a {
