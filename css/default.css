@@ -18,7 +18,7 @@ a:hover {
   padding: 10px;
   background: #ffffff;
   border-radius: 5px;
-  box-shadow: 10px 10px 15px #111111;
+  box-shadow: 10px 10px 25px #111111;
   opacity: 0.9;
 }
 
@@ -31,20 +31,20 @@ a:hover {
 }
 
 #header h1 {
-  position: absolute;
-  left: 20px;
-  top: 20px;
   margin: 0;
 }
 
 #header h2 {
+  position: absolute;
+  left: 18px;
+  top: 18px;
   margin: 0;
 }
 
 #header h3 {
   position: absolute;
-  left: 580px;
-  top: 80px;
+  left: 585px;
+  top: 85px;
   margin: 0;
   font-style: italic;
   color: #666666;
@@ -68,6 +68,7 @@ a:hover {
 
 #content {
   min-height: 200px;
+  padding: 20px;
 }
 
 #footer {
@@ -76,7 +77,14 @@ a:hover {
 }
 
 .date {
+  float: right;
 }
 
 .article-list {
 }
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
