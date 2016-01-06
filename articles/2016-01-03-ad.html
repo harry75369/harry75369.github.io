@@ -47,7 +47,7 @@ jq(document).bind('DOMNodeInserted', function(event) {
 </ul>
 <p>符号微分，简而言之就是让机器像人一样，根据一套有限的函数求导法则，对函数表达式进行变换，得出最终的表达式，从而计算出导数。常见的符号计算系统有 Mathematica；还有 <a href="http://www.sympy.org/en/index.html">SymPy</a> ，这是一个用于符号计算的 Python 的库。数值微分，则是根据函数的泰勒展开，使用有限差分法估得导数。</p>
 <p>无论是符号微分还是数值微分，都有他们的缺陷。符号微分必须要显示地知道函数的表达式，而且当表达式过于复杂时，计算代价很高。而数值微分则受限于机器的浮点精度，会产生较大的误差。</p>
-<p>自动微分是与符号微分、数值微分完全不同的求导方法，既不会产生很高的计算代价，也不会带来额外的误差。它的核心思想有两点：</p>
+<p>自动微分，简称 AD，是 Automatic Differentiation 或者Algorithmic Differentiation 的缩写。它是与符号微分、数值微分完全不同的求导方法，既不会产生很高的计算代价，也不会带来额外的误差。它的核心思想有两点：</p>
 <ol style="list-style-type: decimal">
 <li>所有函数都是简单函数的复合；</li>
 <li>根据链式法则，对函数的求导可以被分解为对简单函数求导的复合。</li>
@@ -70,7 +70,11 @@ jq(document).bind('DOMNodeInserted', function(event) {
 </div>
 <p>跟之前的例子类似，从左往右，我们分别得到 <span class="math inline">\(t_1=x+5=7\)</span>，<span class="math inline">\(t_2=x+y=5\)</span> 与偏导数 <span class="math inline">\(\frac{\partial t_1}{\partial x}=1\)</span>，<span class="math inline">\(\frac{\partial t_1}{\partial y}=0\)</span>，<span class="math inline">\(\frac{\partial t_2}{\partial x}=1\)</span>，<span class="math inline">\(\frac{\partial t_2}{\partial y}=1\)</span>，最后有 <span class="math inline">\(f=t_1\times t_2=7\times 5=35\)</span> 与偏导数 <span class="math inline">\(\frac{\partial f}{\partial t_1}=t_2=5\)</span>，<span class="math inline">\(\frac{\partial f}{\partial t_2}=t_1=7\)</span>，根据 <span class="math display">\[\frac{\partial f}{\partial x}=\frac{\partial f}{\partial t_1}\frac{\partial t_1}{\partial x}+\frac{\partial f}{\partial t_2}\frac{\partial t_2}{\partial x}=5\times 1+7\times 1=12\]</span> <span class="math display">\[\frac{\partial f}{\partial y}=\frac{\partial f}{\partial t_1}\frac{\partial t_1}{\partial y}+\frac{\partial f}{\partial t_2}\frac{\partial t_2}{\partial y}=5\times 0+7\times 1=7\]</span> 我们有 <span class="math display">\[\nabla f(x,y)=(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y})=(12,7)\]</span></p>
 <h2 id="向量函数的微分">向量函数的微分</h2>
-<p>给定可微函数 <span class="math inline">\(\mathbf{f}(\mathbf{x}):\mathbb{R}^n\rightarrow\mathbb{R}^m\)</span>，其微分 <span class="math inline">\(d\mathbf{f}(\mathbf{x})=\nabla\mathbf{f}(\mathbf{x})^T\,d\mathbf{x}\)</span>。梯度 <span class="math inline">\(\nabla\mathbf{f}(\mathbf{x})\)</span> 为 <span class="math display">\[\nabla\mathbf{f}(\mathbf{x})=\begin{bmatrix}
+<p>给定可微函数 <span class="math inline">\(\mathbf{f}(\mathbf{x}):\mathbb{R}^n\rightarrow\mathbb{R}^m\)</span>，其微分 <span class="math inline">\(d\mathbf{f}(\mathbf{x})=\nabla\mathbf{f}(\mathbf{x})^T\,d\mathbf{x}\)</span>。梯度 <span class="math inline">\(\nabla\mathbf{f}(\mathbf{x})\)</span> 为 <span class="math display">\[\nabla\mathbf{f}(\mathbf{x})
+=\begin{bmatrix}
+ \nabla f_1(\mathbf{x}) &amp; \nabla f_2(\mathbf{x}) &amp; \cdots \nabla f_m(\mathbf{x})
+\end{bmatrix}
+=\begin{bmatrix}
  \frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_1} &amp; \cdots &amp; \frac{\partial f_m}{\partial x_1} \\
  \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_2} &amp; \cdots &amp; \frac{\partial f_m}{\partial x_2} \\
  \vdots &amp; \vdots &amp; &amp; \vdots \\
