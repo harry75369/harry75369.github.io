@@ -8,24 +8,28 @@ function check_fail() {
   fi
 }
 
+command -v stack > /dev/null 2>&1 || check_fail "Command not found: stack"
+command -v rsync > /dev/null 2>&1 || check_fail "Command not found: rsync"
+command -v git > /dev/null 2>&1 || check_fail "Command not found: git"
+
 echo "Creating temp directory..."
 TMPDIR=`mktemp -d -q /tmp/site.XXXXXXX`
 check_fail "Failed to create temp directory"
 
 echo "Building hakyll binary..."
-cabal build > /dev/null
+stack build > /dev/null
 check_fail "Failed to build hakyll binary"
 
 echo "Cleaning old files..."
-./dist/build/site/site clean > /dev/null
+stack exec site clean > /dev/null
 check_fail "Failed to clean old files"
 
 echo "Building new site..."
-./dist/build/site/site build > /dev/null
+stack site build > /dev/null
 check_fail "Failed to build new site"
 
 echo "Checking site links..."
-./dist/build/site/site check > /dev/null
+stack site check > /dev/null
 check_fail "Failed to pass link check"
 
 echo "Preparing temp files..."
@@ -37,7 +41,7 @@ git checkout master > /dev/null 2>&1
 check_fail "Failed to switch to master branch"
 
 echo "Synchronizing files..."
-rsync -rzPucl $TMPDIR/ ./ --exclude ".git*" --exclude "_*" --exclude ".cabal*" --exclude "cabal.sandbox.config" --exclude "dist" --exclude ".DS_Store"  > /dev/null
+rsync -rzPucl $TMPDIR/ ./ --exclude ".git*" --exclude "_*" --exclude ".cabal*" --exclude "cabal.sandbox.config" --exclude "dist" --exclude ".DS_Store" --exclude ".stack-work" > /dev/null
 check_fail "Failed to sync files"
 
 echo "Updating repo files..."
@@ -58,4 +62,6 @@ fi
 echo "Switching back to hakyll..."
 git checkout hakyll > /dev/null
 check_fail "Failed to switch to hakyll branch"
+
+echo "All done."
 
