@@ -37,7 +37,7 @@
 <p>给定可微函数 <span class="math inline">\(f(x):\mathbb{R}\rightarrow\mathbb{R}\)</span>，其微分 <span class="math inline">\(df(x)=f&#39;(x)\,dx\)</span>。其中 <span class="math inline">\(f&#39;(x)\)</span> 是 <span class="math inline">\(f\)</span> 关于 <span class="math inline">\(x\)</span> 的导数。若 <span class="math inline">\(x\)</span> 是关于 <span class="math inline">\(t\)</span> 的可微函数 <span class="math inline">\(x(t):\mathbb{R}\rightarrow\mathbb{R}\)</span>，则根据链式法则有 <span class="math display">\[\frac{df(x)}{dt}=\frac{df(x)}{dx}\frac{dx(t)}{dt}=f&#39;(x)\,x&#39;(t)\]</span></p>
 举个例子。有 <span class="math inline">\(f(x)=x^2\)</span>，<span class="math inline">\(x(t)=t+1\)</span>，要求 <span class="math inline">\(f\)</span> 在 <span class="math inline">\(t=1\)</span> 处的导数。其各变量依赖关系如下
 <div class="center">
-<img src="/img/ad-sample1.png" alt="" />
+<img src="/img/ad-sample1.png" />
 </div>
 <p>从左往右，我们分别得到 <span class="math inline">\(t=1\)</span>，<span class="math inline">\(x=t+1=2\)</span>，<span class="math inline">\(\frac{dx}{dt}=1\)</span>，<span class="math inline">\(f=x^2=4\)</span>，<span class="math inline">\(\frac{df}{dx}=2x=4\)</span>，因此 <span class="math inline">\(f\)</span> 在 <span class="math inline">\(t=1\)</span> 处的导数为 <span class="math inline">\(\frac{df}{dt}=\frac{df}{dx}\frac{dx}{dt}=4\times 1=4\)</span>。</p>
 <p>看上去很简单是不是。自动微分的关键，就在于首先把函数分解为几个简单函数的复合，在这里就是加法与平方两种运算；然后再为每种简单函数定义好了导数，比如说，<span class="math inline">\(t+1\)</span> 的导数就是 <span class="math inline">\(1\)</span>，而 <span class="math inline">\(x^2\)</span> 的导数就是 <span class="math inline">\(2x\)</span>；最后通过对导数的组合，得到最终要求的导数。</p>
@@ -46,7 +46,7 @@
 <p>把 <span class="math inline">\(f\)</span> 看作是两个函数的复合：<span class="math inline">\(f(\mathbf{t}):\mathbb{R}^m\rightarrow\mathbb{R}\)</span>，<span class="math inline">\(\mathbf{t}(\mathbf{x}):\mathbb{R}^n\rightarrow\mathbb{R}^m\)</span>，多元函数的链式法则是 <span class="math display">\[\nabla_{\mathbf{x}} f(\mathbf{t}(\mathbf{x}))=\sum_{i=1}^{m}\frac{\partial f}{\partial t_i}\nabla t_i(\mathbf{x})\]</span></p>
 举个例子。有 <span class="math inline">\(f(x,y)=(x+5)\times(x+y)\)</span>，要求 <span class="math inline">\(f\)</span> 在 <span class="math inline">\(x=2\)</span>，<span class="math inline">\(y=3\)</span> 处的导数。其各变量依赖关系如下
 <div class="center">
-<img src="/img/ad-sample2.png" alt="" />
+<img src="/img/ad-sample2.png" />
 </div>
 <p>跟之前的例子类似，从左往右，我们分别得到 <span class="math inline">\(t_1=x+5=7\)</span>，<span class="math inline">\(t_2=x+y=5\)</span> 与偏导数 <span class="math inline">\(\frac{\partial t_1}{\partial x}=1\)</span>，<span class="math inline">\(\frac{\partial t_1}{\partial y}=0\)</span>，<span class="math inline">\(\frac{\partial t_2}{\partial x}=1\)</span>，<span class="math inline">\(\frac{\partial t_2}{\partial y}=1\)</span>，最后有 <span class="math inline">\(f=t_1\times t_2=7\times 5=35\)</span> 与偏导数 <span class="math inline">\(\frac{\partial f}{\partial t_1}=t_2=5\)</span>，<span class="math inline">\(\frac{\partial f}{\partial t_2}=t_1=7\)</span>，根据 <span class="math display">\[\frac{\partial f}{\partial x}=\frac{\partial f}{\partial t_1}\frac{\partial t_1}{\partial x}+\frac{\partial f}{\partial t_2}\frac{\partial t_2}{\partial x}=5\times 1+7\times 1=12\]</span> <span class="math display">\[\frac{\partial f}{\partial y}=\frac{\partial f}{\partial t_1}\frac{\partial t_1}{\partial y}+\frac{\partial f}{\partial t_2}\frac{\partial t_2}{\partial y}=5\times 0+7\times 1=7\]</span> 我们有 <span class="math display">\[\nabla f(x,y)=(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y})=(12,7)\]</span></p>
 <h2 id="向量函数的微分">向量函数的微分</h2>
