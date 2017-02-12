@@ -19,7 +19,7 @@ a:hover {
   padding: 10px;
   background: #ffffff;
   border-radius: 5px;
-  box-shadow: 10px 10px 25px #111111;
+  box-shadow: 3px 3px 10px #111111;
   opacity: 0.9;
 }
 
@@ -32,20 +32,13 @@ a:hover {
 }
 
 #header h1 {
-  margin: 0;
-}
-
-#header h2 {
-  position: absolute;
-  left: 18px;
-  top: 18px;
-  margin: 0;
+  margin-top: 50px;
 }
 
 #header h3 {
   position: absolute;
   left: 585px;
-  top: 85px;
+  top: 10px;
   margin: 0;
   font-style: italic;
   color: #666666;
@@ -53,7 +46,7 @@ a:hover {
 
 #header #nav {
   position: absolute;
-  left: 535px;
+  left: 0px;
   top: 10px;
 }
 
@@ -75,6 +68,7 @@ a:hover {
 #footer {
   display: flex;
   justify-content: center;
+  font-size: small;
 }
 
 .date {
