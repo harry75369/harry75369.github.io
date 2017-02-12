@@ -25,11 +25,11 @@ stack exec site clean > /dev/null
 check_fail "Failed to clean old files"
 
 echo "Building new site..."
-stack site build > /dev/null
+stack exec site build > /dev/null
 check_fail "Failed to build new site"
 
 echo "Checking site links..."
-stack site check > /dev/null
+stack exec site check > /dev/null
 check_fail "Failed to pass link check"
 
 echo "Preparing temp files..."
