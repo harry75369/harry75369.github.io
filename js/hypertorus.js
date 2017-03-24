@@ -20,7 +20,7 @@
     renderer.setClearColor(new THREE.Color('white'));
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     container.innerHTML = '';
-    container.append(renderer.domElement);
+    container.appendChild(renderer.domElement);
 
     hypertorus = addHypertorus(scene);
     time = 0;
