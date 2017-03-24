@@ -180,6 +180,14 @@
     }
   }
 
+  // detect webgl support
+  try {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  } catch (e) {
+    return;
+  }
+
   init();
   render();
 
