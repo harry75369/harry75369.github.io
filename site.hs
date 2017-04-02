@@ -52,7 +52,8 @@ main = hakyll $ do
     compile $ pandocCompilerWith defaultHakyllReaderOptions mathWriterOptions
       >>= loadAndApplyTemplate "templates/article.html" articleCtx
       >>= saveSnapshot "content"
-      >>= loadAndApplyTemplate "templates/duoshuo.html" articleCtx
+      -- >>= loadAndApplyTemplate "templates/duoshuo.html" articleCtx
+      >>= loadAndApplyTemplate "templates/isso.html" articleCtx
       >>= loadAndApplyTemplate "templates/default.html" articleCtx
       >>= relativizeUrls
 
