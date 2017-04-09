@@ -36,17 +36,23 @@ main = hakyll $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
 
+  -- build up tags
+  tags <- buildTags "articles/*" (fromCapture "tags/*.html")
+  let baseCtx = tagCloudField "tagcloud" 80.0 200.0 tags
+              `mappend` defaultContext
+
   -- important pages like index, about and so on
   match "pages/*" $ do
     route $ gsubRoute "pages/" (const "")
           `composeRoutes` setExtension "html"
     compile $ pandocCompiler
-        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+        >>= loadAndApplyTemplate "templates/default.html" baseCtx
         >>= relativizeUrls
 
   -- articles
   let articleCtx = dateField "date" "%Y-%m-%d"
-                 `mappend` defaultContext
+                 `mappend` tagsField "tags" tags
+                 `mappend` baseCtx
   match "articles/*" $ do
     route $ setExtension "html"
     compile $ pandocCompilerWith defaultHakyllReaderOptions mathWriterOptions
@@ -57,6 +63,19 @@ main = hakyll $ do
       >>= loadAndApplyTemplate "templates/default.html" articleCtx
       >>= relativizeUrls
 
+  -- make list of articles for each tag
+  tagsRules tags $ \tag pattern -> do
+    route idRoute
+    compile $ do
+      articles <- loadAll pattern >>= recentFirst
+      let ctx = constField "title" ("标签为“" ++ tag ++ "”的文章")
+                `mappend` listField "articles" articleCtx (return articles)
+                `mappend` baseCtx
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/tag.html" ctx
+        >>= loadAndApplyTemplate "templates/default.html" ctx
+        >>= relativizeUrls
+
   -- make a list for articles
   create ["articles.html"] $ do
     route idRoute
@@ -64,7 +83,7 @@ main = hakyll $ do
       articles <- loadAll "articles/*" >>= recentFirst
       let articlesCtx = listField "articles" articleCtx (return articles)
                       `mappend` constField "title" "文章"
-                      `mappend` defaultContext
+                      `mappend` baseCtx
       makeItem ""
         >>= loadAndApplyTemplate "templates/articles.html" articlesCtx
         >>= loadAndApplyTemplate "templates/default.html" articlesCtx
