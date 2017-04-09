@@ -10,4 +10,4 @@ I major in computer graphics and visualization, but also have strong interest in
 
 My current job relates visualization technique with data analysis.
 
- * My [Github](https://github.com/harry75369)
+ * My [GitHub](https://github.com/harry75369)
