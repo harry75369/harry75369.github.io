@@ -17,6 +17,11 @@
     <updated>2016-01-03T00:00:00Z</updated>
     <summary type="html"><![CDATA[<div>
   <div class="date">2016-01-03</div>
+  <div class="tags">
+    
+    标签：<a href="/tags/math.html">math</a>
+    
+  </div>
 </div>
 
 <h2 id="什么是自动微分">什么是自动微分</h2>
