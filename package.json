@@ -1,0 +1,20 @@
+{
+  "name": "blog",
+  "description": "Chaoya Li's Personal Blog",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "babylonjs": "^3.2.0",
+    "gatsby": "next",
+    "gatsby-plugin-sass": "next",
+    "node-sass": "^4.9.0",
+    "normalize.css": "^8.0.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-helmet": "^5.2.0"
+  }
+}

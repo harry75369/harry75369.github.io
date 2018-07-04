@@ -1,0 +1,36 @@
+.navbar {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  .nav-list {
+    display: flex;
+    justify-content:center;
+    .nav-link {
+      margin: 10px 15px 10px;
+      button {
+        width: 100px;
+        margin: 0;
+        padding: 8px;
+        border: none;
+        cursor: pointer;
+        border-radius: 2px;
+        outline: none;
+      }
+      button:hover {
+        background-color: whitesmoke;
+      }
+    }
+  }
+  .motto {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 20px 20px 0;
+    font-size: 18px;
+    font-style: italic;
+    z-index: -100;
+  }
+}
