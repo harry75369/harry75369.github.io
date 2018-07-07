@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 
+import './title.scss';
+
 class Title extends Component {
   getTitle() {
     const pageTitles = {
-      'index': '首页',
-      'about': '关于',
+      index: '首页',
+      about: '关于',
       '404': '没找到哦',
     };
     if (this.props.type && this.props.type in pageTitles) {
@@ -18,10 +20,12 @@ class Title extends Component {
   }
 
   render() {
-    return (<div>
-      <Helmet title={`Chaoya Li - ${this.getTitle()}`} />
-    </div>);
+    return (
+      <div>
+        <Helmet title={`Chaoya Li - ${this.getTitle()}`} />
+      </div>
+    );
   }
-};
+}
 
 export default Title;

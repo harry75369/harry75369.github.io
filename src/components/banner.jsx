@@ -4,7 +4,6 @@ import Hypertorus from '@/components/gl/hypertorus';
 import './banner.scss';
 
 class Banner extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -30,11 +29,12 @@ class Banner extends Component {
   }
 
   render() {
-    return (<div className='banner' ref='banner'>
-      <Hypertorus width={this.state.width} height={this.state.height} />
-    </div>);
+    return (
+      <div className="banner" ref="banner">
+        <Hypertorus width={this.state.width} height={this.state.height} />
+      </div>
+    );
   }
-
-};
+}
 
 export default Banner;

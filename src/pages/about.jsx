@@ -5,12 +5,14 @@ import Navbar from '@/components/navbar';
 
 class About extends Component {
   render() {
-    return (<div>
-      <Title type='about' />
-      <Banner />
-      <Navbar />
-    </div>);
+    return (
+      <div>
+        <Title type="about" />
+        <Banner />
+        <Navbar />
+      </div>
+    );
   }
-};
+}
 
 export default About;
