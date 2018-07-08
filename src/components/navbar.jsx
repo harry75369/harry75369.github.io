@@ -7,12 +7,12 @@ import './navbar.scss';
 class Navbar extends Component {
   render() {
     return (
-      <div className="navbar" id="navbar">
+      <div className="navbar" id="nav">
         <div className="nav-list">
-          <Link className="nav-link" to="/#navbar">
+          <Link className="nav-link" to="/#nav">
             <button>首页</button>
           </Link>
-          <Link className="nav-link" to="/about">
+          <Link className="nav-link" to="/about#nav">
             <button>关于</button>
           </Link>
         </div>
