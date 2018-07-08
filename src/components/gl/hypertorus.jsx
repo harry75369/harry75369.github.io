@@ -84,6 +84,7 @@ function calcColor(angle) {
   }
 }
 
+/* eslint-disable no-unused-vars */
 function addAxis(scene) {
   const size = 2;
   const x = MeshBuilder.CreateLines(
@@ -225,6 +226,10 @@ class Hypertorus extends Component {
       hypertorus.transform(t);
       scene.render();
       t += 0.01;
+      if (Math.floor(t * 100) % 10 === 0) {
+        /* eslint-disable no-console */
+        console.log(engine.getFps());
+      }
     });
   }
 
