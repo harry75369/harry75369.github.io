@@ -8,7 +8,7 @@ import './about.scss';
 class Presentation extends Component {
   render() {
     return (
-      <div class="presentation">
+      <div className="presentation">
       </div>
     );
   }
