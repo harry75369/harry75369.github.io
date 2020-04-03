@@ -1,0 +1,4 @@
+baseURL = "https://chaoya.top/"
+languageCode = "zh-cn"
+title = "Chaoya Li's Blog"
+theme = "chaoya-blog"
