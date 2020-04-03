@@ -1,0 +1,17 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{end }}{{ end }} ">
+  {{ with .Site.Params.meta.keywords }}<meta name="keywords" content="{{.}}">{{ end }}
+  <link rel="canonical" href="{{ .Permalink }}" />
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+  <link href="https://cdn.bootcss.com/bulma/0.8.1/css/bulma.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}" />
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  {{ if (and (.Site.GoogleAnalytics) (not (in (string .Site.BaseURL) "localhost"))) }}
+    {{ template "_internal/google_analytics_async.html" . }}
+  {{ end }}
+</head>

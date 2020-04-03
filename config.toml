@@ -2,3 +2,32 @@ baseURL = "https://chaoya.top/"
 languageCode = "zh-cn"
 title = "Chaoya Li's Blog"
 theme = "chaoya-blog"
+googleAnalytics = ""
+
+[params]
+  description = "What I cannot build, I do not understand."
+  copyright = "Chaoya Li"
+  since = 2016
+  license = "CC BY-SA 4.0"
+  licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts"
+  weight = 100
+
+[[menu.main]]
+  name = "About"
+  url = "/about"
+  weight = 200
+
+[[menu.social]]
+  name = "Github"
+  url = "https://github.com/harry75369"
+  pre = "<i class='fab fa-lg fa-github'></i>"
+
+[[menu.social]]
+  name = "Zhihu"
+  url = "https://github.com/harry75369"
+  pre = "<i class='fab fa-lg fa-zhihu'></i>"
+
