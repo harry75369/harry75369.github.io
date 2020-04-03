@@ -28,6 +28,6 @@ googleAnalytics = ""
 
 [[menu.social]]
   name = "Zhihu"
-  url = "https://github.com/harry75369"
+  url = "https://www.zhihu.com/people/li-harry"
   pre = "<i class='fab fa-lg fa-zhihu'></i>"
 
