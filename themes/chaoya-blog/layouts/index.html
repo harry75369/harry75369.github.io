@@ -1,17 +1,15 @@
 {{ define "main" }}
 <div class="container-fluid">
-  <section class="hero is-white is-fullheight-with-navbar">
+  <section class="hero is-white is-fullheight-with-navbar"
+    {{ with .Params.heroimage }}style="background: url({{ . }}) center top; background-size: cover;"{{ end }}
+  >
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h1 class="title is-1">{{ .Title }}</h1>
-        <h2 class="subtitle">{{ .Site.Params.description }}</h2>
-        <div id="hypertorus"></div>
+        <h1 class="title is-1 shadowed-text">{{ .Title }}</h1>
+        <h2 class="subtitle shadowed-text">{{ .Description }}</h2>
         {{ .Content }}
       </div>
     </div>
   </section>
 </div>
-<script src="{{ "js/three.min.js" | relURL }}"></script>
-<script src="{{ "js/OrbitControls.js" | relURL }}"></script>
-<script src="{{ "js/hypertorus.js" | relURL }}"></script>
 {{ end }}

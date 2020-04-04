@@ -4,7 +4,6 @@
   var hypertorus, time;
   var body = document.getElementsByTagName('body')[0];
   var width = Math.min(700, body.clientWidth - 48);
-  console.log(width);
   var height = 400;
   var radius = 3;
 

@@ -1,0 +1,5 @@
+#hypertorus > canvas {
+  box-shadow: 3px 3px 10px #111111;
+  border-radius: 5px;
+  opacity: 0.8;
+}
