@@ -3,6 +3,7 @@ languageCode = "zh-cn"
 title = "Chaoya Li's Blog"
 theme = "chaoya-blog"
 googleAnalytics = "UA-27568125-1"
+disqusShortname = "chaoya-li-blog"
 hasCJKLanguage = true
 enableGitInfo = true
 
