@@ -2,7 +2,7 @@ baseURL = "https://chaoya.top/"
 languageCode = "zh-cn"
 title = "Chaoya Li's Blog"
 theme = "chaoya-blog"
-googleAnalytics = ""
+googleAnalytics = "UA-27568125-1"
 hasCJKLanguage = true
 enableGitInfo = true
 
