@@ -2,7 +2,8 @@
 
   var scene, camera, renderer, controls;
   var hypertorus, time;
-  var width = 700;
+  var body = document.getElementsByTagName('body')[0];
+  var width = Math.min(700, body.clientWidth - 48);
   var height = 400;
   var radius = 3;
 
@@ -191,4 +192,4 @@
   init();
   render();
 
-}("container"));
+}("hypertorus"));

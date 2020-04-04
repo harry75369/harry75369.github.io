@@ -1,0 +1,49 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#main {
+  flex: 1;
+}
+.shadowed-text {
+  text-shadow: 0px 0px 1px white;
+}
+@media screen and (min-width: 768px) {
+  .top {
+    order: 2;
+  }
+}
+.post-meta {
+  padding-bottom: 0.5rem;
+}
+.post-toc {
+  position: sticky;
+  top: 70px;
+  align-self: start;
+}
+.post-content h2::before,
+.post-content h3::before,
+.post-content h4::before {
+  display: block;
+  content: " ";
+  margin-top: -70px;
+  height: 70px;
+  visibility: hidden;
+  pointer-events: none;
+}
+.footer {
+  padding-bottom: 1.5rem;
+}
+.builtwith {
+  font-size: small;
+}
+.about {
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 60px 40px;
+  font-size: larger;
+}

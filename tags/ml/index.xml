@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ml on Chaoya Li&#39;s Blog</title>
+    <link>https://chaoya.top/tags/ml/</link>
+    <description>Recent content in ml on Chaoya Li&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 03 Jan 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://chaoya.top/tags/ml/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>自动微分简介</title>
+      <link>https://chaoya.top/2016/01/autodiff/</link>
+      <pubDate>Sun, 03 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://chaoya.top/2016/01/autodiff/</guid>
+      <description>什么是自动微分 在数值优化算法中，经常需要用到函数的导数。为了计算出一个函数的导数，通常有两种方法： 符号微分（Symbolic Diferent</description>
+    </item>
+    
+  </channel>
+</rss>
