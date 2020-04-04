@@ -1,11 +1,18 @@
 {{ define "main" }}
 <div class="container-fluid">
-  <section class="hero is-warning is-fullheight-with-navbar">
+  <section class="hero is-warning is-fullheight-with-navbar"
+           {{ with .Params.heroimage }}style="background: url({{ . }}) center top; background-size: cover;"{{ end }}>
     <div class="hero-body">
       <div class="container">
-        <h1 class="title is-1">{{ .Title }}</h1>
-        <div class="content">
-        {{ .Content }}
+        <div class="columns is-centered">
+          <div class="column is-two-thirds">
+            <div class="about">
+              <h1 class="title is-1">{{ .Title }}</h1>
+              <div class="content">
+              {{ .Content }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
