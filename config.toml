@@ -8,7 +8,7 @@ enableGitInfo = true
 
 [params]
   description = "What I cannot build, I do not understand."
-  copyright = "Chaoya Li"
+  copyright = "Chaoya Li. All right reserved."
   since = 2016
   license = "CC BY-SA 4.0"
   licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"

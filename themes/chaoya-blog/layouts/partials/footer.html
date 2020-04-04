@@ -1,24 +1,28 @@
 <footer class="footer has-background-light">
   <div class="container has-text-centered">
     {{ range .Site.Menus.social }}
-    <a href="{{ .URL }}" title="{{ .Name }}" target="_blank">
-      <span class="icon is-medium has-text-dark">{{ .Pre }}</span>
+    <a href="{{ .URL | safeHTML }}" title="{{ .Name | safeHTML }}" target="_blank">
+      <span class="icon is-medium has-text-dark">{{ .Pre | safeHTML }}</span>
     </a>
     {{ end }}
 
     {{ with .Site.Params.copyright }}
     <div class="copyright">
       {{ with $.Site.Params.license }}
-        <a href="{{$.Site.Params.licenseURL | safeHTML}}" target="_blank">{{ . | safeHTML }}</a>
+        {{ if $.Site.Params.licenseURL }}
+          <a href="{{$.Site.Params.licenseURL | safeHTML}}" target="_blank">{{ . | safeHTML }}</a>
+        {{ else }}
+          <span>{{ . | safeHTML }}</span>
+        {{ end }}
       {{ else }}
-        <span>All right reserved</span>
+        <span>Copyright</span>
       {{ end }}
       &copy; {{ with $.Site.Params.since }}{{ if lt . now.Year }}{{ . | safeHTML }} - {{ end }}{{ end }}{{ now.Format "2006"}} {{ . | safeHTML }}
     </div>
     {{ end }}
 
     <div class="builtwith">
-      Built with <a href="https://gohugo.io" target="_blank">Hugo</a> ❤️ Chaoya Li's Blog.
+      Built with <a href="https://gohugo.io" target="_blank">Hugo</a> ❤️ {{ .Site.Title | safeHTML }}.
     </div>
   </div>
 </footer>
