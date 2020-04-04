@@ -43,3 +43,8 @@ unsafe= true
   url = "https://www.zhihu.com/people/li-harry"
   pre = "<i class='fab fa-lg fa-zhihu'></i>"
 
+[[menu.social]]
+  name = "Linkedin"
+  url = "https://www.linkedin.com/in/chaoya-li-harry"
+  pre = "<i class='fab fa-lg fa-linkedin'></i>"
+
