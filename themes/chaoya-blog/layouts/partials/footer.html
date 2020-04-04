@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer has-background-light">
   <div class="container has-text-centered">
     {{ range .Site.Menus.social }}
     <a href="{{ .URL }}" title="{{ .Name }}" target="_blank">
@@ -9,7 +9,7 @@
     {{ with .Site.Params.copyright }}
     <div class="copyright">
       {{ with $.Site.Params.license }}
-        <a href="{{$.Site.Params.licenseURL | safeHTML}}">{{ . | safeHTML }}</a>
+        <a href="{{$.Site.Params.licenseURL | safeHTML}}" target="_blank">{{ . | safeHTML }}</a>
       {{ else }}
         <span>All right reserved</span>
       {{ end }}
@@ -18,7 +18,7 @@
     {{ end }}
 
     <div class="builtwith">
-    Built with <a href="https://gohugo.io" target="_blank">Hugo</a> ❤️ Chaoya Li's Blog.
+      Built with <a href="https://gohugo.io" target="_blank">Hugo</a> ❤️ Chaoya Li's Blog.
     </div>
   </div>
 </footer>

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="container">
+  <div class="section">
+    <div class="content">
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+      <ul>
+        {{ range .Pages }}
+        <li>
+          {{ if .Draft }}<span class="tag is-warning">draft</span>{{ end }}
+          {{ if (and (eq .Kind "page") (not .Date.IsZero)) }}
+            <span>{{ .Date.Format "2006-01-02" }}</span>
+          {{ end }}
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          {{ if eq .Kind "page" }}
+            {{ range .Params.categories }}<a class="tag is-info" href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . | upper }}</a> {{ end }}
+            {{ range .Params.tags }}<a class="tag is-success" href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . | lower }}</a> {{ end }}
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -3,6 +3,8 @@ languageCode = "zh-cn"
 title = "Chaoya Li's Blog"
 theme = "chaoya-blog"
 googleAnalytics = ""
+hasCJKLanguage = true
+enableGitInfo = true
 
 [params]
   description = "What I cannot build, I do not understand."
@@ -10,6 +12,14 @@ googleAnalytics = ""
   since = 2016
   license = "CC BY-SA 4.0"
   licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
+
+[permalinks]
+  posts = "/:year/:month/:filename/"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 10
 
 [[menu.main]]
   name = "Posts"

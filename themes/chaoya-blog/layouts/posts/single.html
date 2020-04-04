@@ -1,0 +1,51 @@
+{{ define "main" }}
+<div class="container-fluid">
+  <section class="hero is-light">
+    <div class="hero-body">
+      <div class="container">
+          <h1 class="title is-1">{{ .Title }}{{ if .Draft }}<span class="tag is-warning">draft</span>{{ end }}</h1>
+
+          {{ if (or .Params.categories .Params.tags) }}
+          <div class="post-meta">
+            <div class="icon"><i class="fas fa-tags"></i></div>
+            {{ range .Params.categories }}<a class="tag is-info" href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . | upper }}</a> {{ end }}
+            {{ range .Params.tags }}<a class="tag is-success" href="{{ "/tags/" | relURL }}{{ . | urlize }}">{{ . | lower }}</a> {{ end }}
+          </div>
+          {{ end }}
+
+          {{ if not .Date.IsZero }}
+          <div class="post-meta">
+            <div class="icon"><i class="fas fa-calendar-alt"></i></div> {{ .Date.Format "2006-01-02" }}
+            {{ if .Lastmod.After .Date }}(last edited {{ .Lastmod.Format "2006-01-02" }}){{ end }}
+          </div>
+          {{ end }}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column top">
+          <div class="post-toc">
+            <div class="content">
+                {{ .TableOfContents }}
+            </div>
+          </div>
+        </div>
+        <div class="column is-two-thirds">
+          <div class="post-content">
+            <div class="content">
+              {{ .Content }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      TODO: disqus section
+    </div>
+  </section>
+</div>
+{{ end }}

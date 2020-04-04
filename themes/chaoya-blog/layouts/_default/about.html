@@ -1,12 +1,15 @@
 {{ define "main" }}
 <div class="container-fluid">
-  <section class="hero is-success is-fullheight-with-navbar">
+  <section class="hero is-warning is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container">
         <h1 class="title is-1">{{ .Title }}</h1>
+        <div class="content">
         {{ .Content }}
+        </div>
       </div>
     </div>
   </section>
 </div>
 {{ end }}
+
