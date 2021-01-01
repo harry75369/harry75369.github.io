@@ -6,13 +6,22 @@
     <description>Recent content in Posts on Chaoya Li&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 03 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://chaoya.top/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Nov 2020 10:28:31 +0800</lastBuildDate><atom:link href="https://chaoya.top/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Skia 源码分析 - Chapter 1</title>
+      <link>https://chaoya.top/posts/skia-1/</link>
+      <pubDate>Tue, 03 Nov 2020 10:28:31 +0800</pubDate>
+      
+      <guid>https://chaoya.top/posts/skia-1/</guid>
+      <description>目录 Chapter 1 - 介绍 Chapter 2 - 开发环境准备 Chapter 3 - 模块初探 Chapter 4 - 牛刀小试 &amp;hellip; 引言 欢迎来到计算机图形学的世界。哦，不，确切地讲，是二维计算机图形学的世界。 你</description>
+    </item>
+    
     <item>
       <title>自动微分简介</title>
-      <link>https://chaoya.top/2016/01/autodiff/</link>
+      <link>https://chaoya.top/posts/autodiff/</link>
       <pubDate>Sun, 03 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://chaoya.top/2016/01/autodiff/</guid>
+      <guid>https://chaoya.top/posts/autodiff/</guid>
       <description>什么是自动微分 在数值优化算法中，经常需要用到函数的导数。为了计算出一个函数的导数，通常有两种方法： 符号微分（Symbolic Diferent</description>
     </item>
     

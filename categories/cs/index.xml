@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cs on Chaoya Li&#39;s Blog</title>
+    <link>https://chaoya.top/categories/cs/</link>
+    <description>Recent content in cs on Chaoya Li&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 03 Nov 2020 10:28:31 +0800</lastBuildDate><atom:link href="https://chaoya.top/categories/cs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Skia 源码分析 - Chapter 1</title>
+      <link>https://chaoya.top/posts/skia-1/</link>
+      <pubDate>Tue, 03 Nov 2020 10:28:31 +0800</pubDate>
+      
+      <guid>https://chaoya.top/posts/skia-1/</guid>
+      <description>目录 Chapter 1 - 介绍 Chapter 2 - 开发环境准备 Chapter 3 - 模块初探 Chapter 4 - 牛刀小试 &amp;hellip; 引言 欢迎来到计算机图形学的世界。哦，不，确切地讲，是二维计算机图形学的世界。 你</description>
+    </item>
+    
+  </channel>
+</rss>
