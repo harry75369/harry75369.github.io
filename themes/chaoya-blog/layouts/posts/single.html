@@ -4,6 +4,7 @@
     <div class="hero-body">
       <div class="container">
           <h1 class="title is-1">{{ .Title }}{{ if .Draft }}<span class="tag is-warning">draft</span>{{ end }}</h1>
+          {{ if .Params.Subtitle }}<h1 class="title is-2">{{ .Params.Subtitle }}</h1>{{ end }}
 
           {{ if (or .Params.categories .Params.tags) }}
           <div class="post-meta">
