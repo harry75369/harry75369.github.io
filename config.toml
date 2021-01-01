@@ -17,7 +17,7 @@ unsafe= true
   licenseURL = "https://creativecommons.org/licenses/by-sa/4.0"
 
 [permalinks]
-  posts = "/:year/:month/:filename/"
+  posts = "/posts/:filename/"
 
 [[menu.main]]
   name = "Home"
