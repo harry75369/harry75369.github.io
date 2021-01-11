@@ -7,12 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language><atom:link href="https://chaoya.top/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Skia 源码分析 - Chapter 2</title>
+      <link>https://chaoya.top/posts/skia-2/</link>
+      <pubDate>Thu, 07 Jan 2021 10:02:24 +0800</pubDate>
+      
+      <guid>https://chaoya.top/posts/skia-2/</guid>
+      <description>目录 Chapter 1 - 介绍 Chapter 2 - 源码构建 Chapter 3 - 牛刀小试 Chapter 4 - 模块初探 &amp;hellip; 引言 在上一章的最后，我们已经拿到了 Skia 源码以及三方依赖库的源码。其实，在 Skia 的源码库里</description>
+    </item>
+    
+    <item>
       <title>Skia 源码分析 - Chapter 1</title>
       <link>https://chaoya.top/posts/skia-1/</link>
       <pubDate>Tue, 03 Nov 2020 10:28:31 +0800</pubDate>
       
       <guid>https://chaoya.top/posts/skia-1/</guid>
-      <description>目录 Chapter 1 - 介绍 Chapter 2 - 源码构建 Chapter 3 - 模块初探 Chapter 4 - 牛刀小试 &amp;hellip; 引言 欢迎来到计算机图形学的世界。哦，不，确切地讲，是二维计算机图形学的世界。 你可能</description>
+      <description>目录 Chapter 1 - 介绍 Chapter 2 - 源码构建 Chapter 3 - 牛刀小试 Chapter 4 - 模块初探 &amp;hellip; 引言 欢迎来到计算机图形学的世界。哦，不，确切地讲，是二维计算机图形学的世界。 你可能</description>
     </item>
     
     <item>
