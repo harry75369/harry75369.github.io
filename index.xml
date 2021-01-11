@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language><atom:link href="https://chaoya.top/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>软路由的访客网络设置</title>
+      <link>https://chaoya.top/posts/guest-network/</link>
+      <pubDate>Mon, 11 Jan 2021 21:15:14 +0800</pubDate>
+      
+      <guid>https://chaoya.top/posts/guest-network/</guid>
+      <description>软路由是目前非常流行的家庭网络部署方案。软路由一般是指带至少两个有线网口的 X86 主机，但 ARM 架构的单网口电视盒子也可以是软路由，只要能够安装 Linux 并配</description>
+    </item>
+    
+    <item>
       <title>Skia 源码分析 - Chapter 2</title>
       <link>https://chaoya.top/posts/skia-2/</link>
       <pubDate>Thu, 07 Jan 2021 10:02:24 +0800</pubDate>
