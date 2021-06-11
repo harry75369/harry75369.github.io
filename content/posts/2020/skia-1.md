@@ -24,13 +24,13 @@ tags: ["graphics", "skia"]
 
 为什么这么说呢？可以简单这么理解。
 
-首先，现代图形处理单元（即 GPU）在硬件上就是为三维图形而生的，而各种图形接口（如 OpenGL、Metal、DirectX 等）也是针对三维图形而设计的。虽然说可以使用针对三维的图形接口让 GPU 为二维图形工作，但这并不是一个简单的三维到二维的投影就完事了。二维图形有自己的一套“业务逻辑”。拿领域专用语言（Domain-Specific Language，简称 DSL）来打比方，用于构建三维图形的 DSL 与二维图形的 DSL 是完全不同的，我们需要构建一个复杂的“编译器”，将一种 DSL 编译到另外一种 DSL 上去。
+首先，现代图形处理单元（即 GPU）在硬件上就是为三维图形而生的，而各种图形接口（如 OpenGL、Metal、DirectX 等）也是针对三维图形而设计的。虽然说可以使用针对三维的图形接口让 GPU 为二维图形工作，但这并不是一个简单的三维到二维的投影就完事了。二维图形有自己的一套“业务逻辑”。拿领域专用语言（Domain-Specific Language，简称 DSL）来打比方，用于构建三维图形的 DSL 与二维图形的 DSL 是完全不同的。为了让只懂三维的 GPU 支持二维图形渲染，你可以认为我们需要构建一个复杂的“编译器”，将一种 DSL 编译到另外一种 DSL 上去。
 
 当然，这是在假定使用 GPU 来实现二维图形的情况下。如果是用 CPU 来实现，那就是另外一回事情。基于 CPU 来绘制二维图形是一门非常古老与成熟的学问，但是在绘制效率上会比较低效。其实 Skia 也有针对 CPU 的绘制后端，只不过这不是我们讨论的重点。目前使用 CPU 做图形的应用场景较少，可能会用到的地方，比如在一些没有 GPU 的嵌入式控制芯片中，只能通过 CPU 的方式来实现二维图形的绘制。
 
 其次，二维图形技术已经成为用户界面重要的基石。比如说，浏览器中，你正在浏览的网页（包括图形与文字），就是由浏览器中的二维图形引擎所绘制出来的。而手机上，包括系统界面在内的所有 App 也都是由手机系统中的二维图形引擎所绘制出来的。虽然说某些手机厂商正在努力在其渲染引擎里加入三维特效的部分，但不可否认其用户界面还是以二维图形的绘制为主。
 
-我们接下来会和你一起来分析 Skia 这个二维图形引擎的源码，探索二维图形学这个鲜为人知的世界。
+我们接下来会和你一起来分析 Skia 这个二维图形引擎的源码，探索二维图形学这个最熟悉的陌生世界。
 
 在那之前，我们先来聊下 Flutter。Flutter 是由 Google 推出的一款跨平台的 App 开发工具包，支持 PC 端、移动端甚至网页端应用的开发。Flutter 上层是使用 Dart 语言开发的，但这个当然不关我们啥事。Flutter 之所以能够在每个平台下都获得一致的用户界面，就是因为他使用了 Skia 作为渲染底层。而在这之前，Skia 早已经被用在 Google Chrome 浏览器里用于渲染网页了。和渲染网页一个道理，Flutter 用 Skia 绘制出了系统无关（或者说跨系统一致）的用户界面，从而获得一致的用户体验，并直接降低了不同系统下 App 的开发成本（因为不同平台下可以使用同一套代码）。
 
@@ -38,17 +38,17 @@ tags: ["graphics", "skia"]
 
 ## Skia 历史
 
-Skia 一开始由 Michael Reed 创办的 Skia 公司开发，被 Google 在 2005 年收购之后，于 2008 年以 New BSD 许可证[开源](http://www.satine.org/archives/2008/09/02/skia-source-code-released/)。其实在开源之前，Skia 就已经承担起 Google Chrome 与 Android 上的二维图形的渲染任务了。就算从 2005 年开始算起，Skia 到现在也已经有 15 年的历史了。
+Skia 一开始由 Michael Reed 创办的 Skia 公司开发，被 Google 在 2005 年收购之后，于 2008 年以 New BSD 许可证[开源](http://www.satine.org/archives/2008/09/02/skia-source-code-released/)。其实在开源之前，Skia 就已经承担起 Google Chrome 与 Android 上的二维图形的渲染任务了。就算从 2005 年开始算起，Skia 到现在也有将近 20 年的历史了。
 
 ## Skia 版本
 
-Skia 是基于 Milestone 的方式进行版本发布。大概每一个半月会发布一个 Milestone。可以在 Skia 官网上看到 Skia 发布过所有的 Milestone 的[变更信息](https://skia.org/user/release/release_notes)以及目前 Skia Milestone 的[发布计划](https://skia.org/user/release/schedule)。
+Skia 是基于 Milestone 的方式进行版本发布。大概每一个半月（即每六周）会发布一个 Milestone 版本。可以在 Skia 官网上看到 Skia 发布过所有的 Milestone 的[变更信息](https://skia.org/docs/user/release/release_notes)以及目前 Skia Milestone 的[发布计划](https://skia.org/docs/user/release/schedule)。
 
-除此之外，我们将在 Skia 源码库里看到，Skia 还有一些专门针对 Android 与 Flutter 的分支版本，这些版本不对外发布，但我们源码库都有了，有兴趣的小伙伴自然可以去对这些版本一探究竟。
+除此之外，我们将在 Skia 源码库里看到，Skia 还有一些专门针对 Android 与 Flutter 的分支版本，这些版本不对外发布。但我们既然有了源码库，有兴趣的小伙伴可以自行去对这些版本一探究竟。
 
 ## Skia 源码以及其三方依赖库的获取
 
-Skia 源码托管在 Google 自己的 Git 源码服务器上，可以参考官网[下载页面](https://skia.org/user/download)来获取。另外，在 Github 上也有 Skia 源码[镜像](https://github.com/google/skia/)，与主源码库基本保持同步。
+Skia 源码托管在 Google 自己的 Git 源码服务器上，可以参考官网[下载页面](https://skia.org/docs/user/download)来获取。另外，在 Github 上也有 Skia 源码[镜像](https://github.com/google/skia/)，与主源码库基本保持同步。
 
 需要注意的是，我们这里只要获取 Skia 源码库即可，无需下载官网下载页面上用于构建 Chrome 的 `depot_tools` 工具。因为 `depot_tools` 主要还是针对 Chrome 的构建，其中有些工具，比如其提供的 `gn` 无法适用于 Skia 的构建；而有些工具可以直接通过系统安装，比如 Ninja，因此也没有必要依赖 `depot_tools` 来提供。
 

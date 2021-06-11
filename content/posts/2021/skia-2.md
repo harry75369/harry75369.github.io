@@ -16,12 +16,12 @@ tags: ["graphics", "skia"]
 
 ## 引言
 
-在上一章的最后，我们已经拿到了 Skia 源码以及三方依赖库的源码。其实，在 Skia 的源码库里有很多分支，比如以 `chrome/m*` 为开头的分支版本。这里的 `m`代表 Milestone，即 Skia 的主要公开版本。我们接下来所有的讨论都会基于 `chrome/m88` 分支，即 Milestone 88 版本。要切换到该分支，执行如下命令即可
+在上一章的最后，我们已经拿到了 Skia 源码以及三方依赖库的源码。其实，在 Skia 的源码库里有很多分支，比如以 `chrome/m*` 为开头的分支版本。这里的 `m`代表 Milestone，即 Skia 的主要公开版本。我们接下来所有的讨论都会基于 `chrome/m92` 分支，即 Milestone 92 版本。要切换到该分支，执行如下命令即可
 ```
-git checkout chrome/m88
+git checkout chrome/m92
 ```
 
-我们简单查看该分支中的内容，可以发现有以下文件与目录
+我们可以通过执行命令 `tree -L 1 -F --dirsfirst`，来查看根目录下的文件
 ```
 ├── animations/
 ├── bazel/
@@ -31,7 +31,6 @@ git checkout chrome/m88
 ├── build_overrides/
 ├── buildtools/
 ├── client_utils/
-├── common/
 ├── demos.skia.org/
 ├── dm/
 ├── docker/
@@ -56,35 +55,37 @@ git checkout chrome/m88
 ├── AUTHORS*
 ├── BUILD.bazel
 ├── BUILD.gn
-├── codereview.settings
 ├── CONTRIBUTING
 ├── CQ_COMMITTERS
 ├── DEPS
-├── go.mod
-├── go.sum
+├── DIR_METADATA
 ├── LICENSE
-├── OWNERS
 ├── PRESUBMIT.py
-├── public.bzl
 ├── README
 ├── README.chromium
 ├── RELEASE_NOTES.txt
-├── whitespace.txt
-└── WORKSPACE.bazel
+├── WORKSPACE.bazel
+├── codereview.settings
+├── go.mod
+├── go.sum
+├── public.bzl
+└── whitespace.txt
 ```
 
-可以看到，Skia 源码库中有非常多的文件与目录。这往往会让我们不知所措，不知道从哪里开始看起。不过没关系，让我们先从对 Skia 源码的构建开始，慢慢揭开 Skia 源码的神秘面纱。
+可以看到，Skia 源码库中有非常多的文件与目录。这可能会让我们不知所措，因为完全不知道从哪里开始入手。不过没关系，让我们先从对 Skia 源码的构建开始，慢慢揭开 Skia 源码的神秘面纱。
 
-## 官方构建
+## 官方构建方式
 
 构建 Skia 最简单、快速的方式是使用其官方构建方式。在上一章的最后，我们已经让 Skia 为我们准备好了 `gn` 工具。`gn` 是一个“元"构建工具，可以帮助我们生成 Ninja 的构建文件，从而对 Skia 进行构建。生成 Ninja 构建文件的命令如下
 ```
 bin/gn gen out/Official --args='is_official_build=true'
 ```
 
-在这条命令中，`gn` 根据用户给定的 `--args` 参数与 Skia 根目录下的 `BUILD.gn` 脚本
-* 判断要构建的是官方配置好的正式版还是开发版（通过指定`is_official_build=true`来设定为正式版本，默认为`false`）
-* 判断要构建的是动态链接版本还是静态链接版本（通过指定`is_component_build=true`来设定为动态链接版本，默认为`false`）
+这里首先说明下 `gn` 命令的作用。
+
+`gn` 会根据用户给定的 `--args` 参数与 Skia 根目录下的 `BUILD.gn` 脚本
+* 判断要构建的是官方配置好的正式版还是开发版（通过指定`is_official_build=true`来设定为正式版本，默认为`false`，即开发版本）
+* 判断要构建的是动态链接版本还是静态链接版本（通过指定`is_component_build=true`来设定为动态链接版本，默认为`false`，即静态链接版本）
 * 判断构建平台的操作系统（`gn`自行判断，下同）
 * 判断构建平台的 CPU 指令集
 * 判断构建平台的编译器种类
@@ -93,24 +94,26 @@ bin/gn gen out/Official --args='is_official_build=true'
 * 指定各个源码模块与源码文件的组合
 * 指定编译器参数，包括控制条件编译的宏
 
-从而生成 Ninja 构建文件。其实这些构建文件会有很多，因此生成的是一个目录。
+从而生成 Ninja 构建文件。其实这些构建文件会有很多，因此生成的是一个目录。在我们这个例子中就是`out/Official`目录。
 
-我们让 Ninja 读取该目录下的构建文件，即可调用编译器来构建 Skia。
+然后，我们让 Ninja 读取该目录下的构建文件，Ninja 即可调用编译器来构建 Skia。
 ```
 ninja -C out/Official
 ```
 
-在这里的 `Official` 构建中，我们最终会得到一个大约 20 多兆的 `libskia.a` 文件。这便是 Skia 可以给其他工程使用的预编译好的二进制静态链接库。
+在我们这次构建中，最终会得到一个大约 20 多兆的 `libskia.a` 文件。这便是 Skia 可以给其他工程使用的预编译好的二进制静态链接库。如果希望得到动态链接库 `libskia.so`，则需要指定 `is_component_build=true`。
+
+需要说明的是，我们这里所谓的官方构建，并不只是指设置参数为`--args='is_official_build=true'`，而是指使用 `gn` + `ninja` 的这种构建方式。
 
 ## 官方样例构建
 
 目前为止，我们只得到了一个编译好的 Skia 二进制链接库，仅此而已。
 
-有没有办法看到 Skia 渲染出的二维图形呢？当然可以。Skia 自带了一些用于测试与调试的样例。不过在 `gn` 的构建脚本中，对这些样例的编译做了一些限制：
-1. 不能是 `Official` 构建。
-2. 不能是动态链接版本的构建，因为这些样例都是静态链接到 Skia 的二进制库的。
+有没有办法看到 Skia 渲染出的二维图形呢？当然可以。Skia 自带了一些用于测试与调试的样例。不过在 `gn` 的构建脚本中，对这些样例的编译做了一些限制（有兴趣的小伙伴们可以自行分析 `BUILD.gn` 这个构建脚本以及 `gn/` 目录下的相关脚本）：
+1. 不能是 `Official` 构建，即要求`is_official_build=false`。
+2. 不能是动态链接版本的构建，即要求`is_component_build=false`。
 
-有兴趣的小伙伴们可以自行分析 `BUILD.gn` 这个构建脚本以及 `gn/` 目录下的相关脚本。在这里，我们只要执行下面的命令即可
+因此，为了得到官方测试样例，最快捷的方式就是构建官方的开发版本，即 `Debug` 构建版本
 ```
 bin/gn gen out/Debug
 ninja -C out/Debug
@@ -147,13 +150,13 @@ diff -u official_args debug_args | less
 
 等到 `Debug` 版本构建完成，我们可以发现 `out/Debug` 目录下比 `Official` 版本多出一些可执行文件，比如 `viewer`、`SkiaSDLExample`、`HelloWorld` 等。
 
-我们可以在根目录下运行 `viewer`（因为它会读取当前目录下的 `resources` 目录）
+我们可以在根目录下执行 `./out/Debug/viewer`（因为它会读取当前运行目录下的 `resources` 目录，而该目录只在根目录下才有），然后按左右方向键切换用例，可以看见下面的图形
 
 {{< figure src="/img/skia-viewer.png" width="500px" >}}
 
-`viewer` 默认使用 CPU 后端，我们使用 `d` 键切换到 GPU 后端，比如 OpenGL 后端，然后按左右方向键切换用例。另外也可以按 `h` 键查看 `viewer` 的帮助。通过它我们可以对 Skia 的渲染能力有一个初步的感性认识。
+`viewer` 默认使用 CPU 后端，我们使用 `d` 键切换到 GPU 后端。我们这里是 Linux 环境，所以默认是 OpenGL 后端。另外也可以按 `h` 键查看 `viewer` 的帮助。通过它我们可以对 Skia 的渲染能力有一个初步的感性认识。
 
-这里需要说明的是，`viewer` 中样例的主要目的是为了对 Skia 进行测试与调试，比如有些从 Chrome 报告过来的 bugs，就会在 `viewer` 中复现与调试。因此这些样例除了少数几个，基本在图形美感方面没有什么意义。
+这里需要说明的是，`viewer` 中样例的主要目的是为了对 Skia 进行测试与调试，比如有些从 Chrome 报告过来的 bugs，就会在 `viewer` 中复现与调试。因此这些样例，除了少数几个，在图形美感方面基本没有什么意义。
 
 ## 自定义构建
 
@@ -173,7 +176,7 @@ ninja -C out/Release
 
 总之，虽然 Skia 官方的构建脚本十分适合正式版的构建场景与测试版的开发场景，但对于我们研究 Skia 源码来说却是一个不小的阻碍。
 
-因此，我们倒不如从零出发，构建出一套自定义构建体系。这可能没有 Skia 官方构建脚本覆盖全面，但至少让我们能够对 Skia 的构建过程有足够的控制权，继而帮助我们以后理解甚至修改 Skia 源码。
+因此，我们倒不如从零出发，构建出一套自定义构建体系。这可能没有 Skia 官方构建脚本覆盖全面，但至少让我们能够对 Skia 的构建过程有足够的控制权，继而帮助我们以后理解与修改 Skia 源码。
 
 ### 基于 CMake 的自定义构建
 
@@ -181,7 +184,7 @@ ninja -C out/Release
 
 我们也需要写一个类似于 `BUILD.gn` 的构建脚本，对 CMake 来说，这个脚本叫做 `CMakeLists.txt`。庆幸的是，相比于 `gn`，CMake 更加常见，也更容易找到资料与社区帮助。
 
-我们这里对 `CMakeLists.txt` 的编写过程略去不讲，直接给出最后的代码，可以在这里下载。
+我们这里对 `CMakeLists.txt` 的编写过程略去不讲，直接给出最后的代码，可以在[这里](https://github.com/harry75369/skia-custom)下载。
 
 在准备好源码之后，执行如下代码即可编译出 Skia 的二进制静态链接库
 ```
